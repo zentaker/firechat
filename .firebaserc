@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "loginangulardemo": {
+      "hosting": {
+        "firechat": [
+          "loginangulardemo"
+        ]
+      }
+    }
+  }
+}
