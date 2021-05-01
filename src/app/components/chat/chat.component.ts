@@ -22,8 +22,11 @@ export class ChatComponent {
       return;
     }
     this.ChatService.agregarMensaje(this.mensaje).then(() => {
-      console.log('mensaje enviado')
+      this.mensaje = "";
+    }).catch((err) => {
+      console.error('Error al enviar', err);
     })
+    
     
   }
 
