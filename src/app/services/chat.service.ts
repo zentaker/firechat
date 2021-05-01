@@ -30,10 +30,18 @@ export class ChatService {
     })
    
   }
-  login( proveedor: string ) {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  login(proveedor: string) {
+    
+    if (proveedor === 'google') {
+      this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      
+    } else {
+      this.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    }
+    
   }
   logout() {
+    this.usuario = {};
     this.auth.signOut();
   }
   cargarMensajes(){
@@ -54,10 +62,10 @@ export class ChatService {
   agregarMensaje(texto: string) {
     //falta el uid del usuario
     let mensaje: Mensaje = {
-      nombre: 'demo',
+      nombre: this.usuario.nombre,
       mensaje: texto,
       fecha: new Date().getTime(),
-      uid: "1234"
+      uid: this.usuario.uid
     }
     return this.itemsCollection.add(mensaje);
 
