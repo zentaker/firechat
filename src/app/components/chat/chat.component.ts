@@ -1,3 +1,4 @@
+import { HtmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 
@@ -6,12 +7,30 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
 
   mensaje: string = "";
+  elemento: any;
 
   constructor(public ChatService: ChatService) {
-    this.ChatService.cargarMensajes().subscribe();
+    this.ChatService.cargarMensajes().subscribe(() => {
+
+      setTimeout(() => {
+           //cuando llegen los mensajes mover el foco al final
+      this.elemento.scrollTop = this.elemento.scrollHeight;
+        
+      },50)
+
+   
+    });
+    
+  }
+  
+  ngOnInit() {
+    //hacer la referencia al alemento en el Html
+    this.elemento = document.getElementById('app-mensajes');
+
+     
    }
 
 
